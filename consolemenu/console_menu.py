@@ -38,11 +38,13 @@ class ConsoleMenu(object):
     currently_active_menu = None
 
     def __init__(self, title=None, subtitle=None, screen=None, formatter=None,
-                 prologue_text=None, epilogue_text=None,
+                 prologue_text=None, epilogue_text=None, clear_screen=True,
                  show_exit_option=True, exit_option_text='Exit'):
         if screen is None:
             screen = Screen()
         self.screen = screen
+        
+        self.clear_screen_before_render = clear_screen
 
         if formatter is None:
             formatter = MenuFormatBuilder()
@@ -221,7 +223,7 @@ class ConsoleMenu(object):
         self._running.set()
 
         while self._running.wait() is not False and not self.should_exit:
-            self.screen.clear()
+            self.clear_screen()
             self.draw()
             self.process_user_input()
 
@@ -374,7 +376,8 @@ class ConsoleMenu(object):
         """
         Clear the screen belonging to this menu
         """
-        self.screen.clear()
+        if self.clear_screen_before_render:
+            self.screen.clear()
 
     # Getters to get text in case method reference
     def get_title(self):

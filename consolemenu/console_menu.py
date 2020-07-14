@@ -23,6 +23,7 @@ class ConsoleMenu(object):
         show_exit_option (bool): Specifies whether this menu should show an exit item by default. Defaults to True.
             Can be overridden when the menu is started.
         exit_option_text (str): Text for the Exit menu item. Defaults to 'Exit'.
+        clear_screen (bool): Set False to disable clearing screen
 
     Attributes:
         cls.currently_active_menu (:obj:`ConsoleMenu`): Class variable that holds the currently active menu or None
